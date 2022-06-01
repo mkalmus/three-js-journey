@@ -1,5 +1,6 @@
 import './style.css'
 import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 const cursor = {
     x: 0,
@@ -35,6 +36,13 @@ scene.add(mesh)
 // Camera
 //(field of fiew, aspect ratio, near, far)
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
+
+// Controls
+const controls = new OrbitControls(camera, canvas)
+//Smoother animation
+controls.enableDamping = true
+//controls.target.y = 2
+
 // in orthographic, objects are the same size regardless of distance
 // parameters are how far the camera can see in each direction - left right top bottom
 const aspectRatio = sizes.width / sizes.height
@@ -58,14 +66,17 @@ const tick = () => {
     const elapsedTime = clock.getElapsedTime()
 
     // Update Camera
-    camera.position.x = Math.sin(cursor.x * Math.PI * 2) * 3
-    camera.position.z = Math.cos(cursor.x * Math.PI * 2) * 3
-    camera.position.y = cursor.y * 5
+    // camera.position.x = Math.sin(cursor.x * Math.PI * 2) * 3
+    // camera.position.z = Math.cos(cursor.x * Math.PI * 2) * 3
+    // camera.position.y = cursor.y * 5
     // camera.lookAt(new THREE.Vector3())
-    camera.lookAt(mesh.position)
+    // camera.lookAt(mesh.position)
 
     // Update objects
     // mesh.rotation.y = elapsedTime
+
+    //need to update each frame to use damping and before rendering
+    controls.update()
 
     // Render
     renderer.render(scene, camera)
