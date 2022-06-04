@@ -21,7 +21,7 @@ const scene = new THREE.Scene()
 
 // Axes helper
 const axesHelper = new THREE.AxesHelper()
-scene.add(axesHelper)
+// scene.add(axesHelper)
 
 /**
  * Textures
@@ -34,7 +34,7 @@ fontLoader.load(
     '/fonts/helvetiker_regular.typeface.json',
     (font) => {
         const textGeometry = new TextGeometry(
-            'Michael Kalmus',
+            'cuisine',
             {
                 font: font,
                 size: 0.5,
